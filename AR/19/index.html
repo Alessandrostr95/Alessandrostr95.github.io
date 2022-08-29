@@ -1,0 +1,221 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="PageRank Mentre con l&rsquo;algoritmo HITS la rilevanza di una pagina dipende da quante pagine è putanta e a quante punta, esistono contesti in cui la rilevanza non dipende dal numero bensì dalla qualità dei link."><title>🪴 Alessandro Straziota's Notes</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://Alessandrostr95.github.io//icon.png><link href=https://Alessandrostr95.github.io/styles.b3e1e36b0403ac565c9392b3e23ef3b6.min.css rel=stylesheet><link href=https://Alessandrostr95.github.io/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://Alessandrostr95.github.io/js/darkmode.ff3928c070aaa41dd4e6a0d10ab7e115.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://Alessandrostr95.github.io/js/popover.abe6a51cc7138c5dff00f151dd627ad1.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://Alessandrostr95.github.io/",fetchData=Promise.all([fetch("https://Alessandrostr95.github.io/indices/linkIndex.12ce054d07db7354a1a118a75dec1a5f.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://Alessandrostr95.github.io/indices/contentIndex.068b8904bb64a00c9464ed48895ebd2f.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://Alessandrostr95.github.io",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://Alessandrostr95.github.io",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/Alessandrostr95.github.io\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://Alessandrostr95.github.io/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://Alessandrostr95.github.io/>🪴 Alessandro Straziota's Notes</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><p class=meta>Last updated
+Unknown
+<a href=https://github.com/Alessandrostr95/quartz/tree/hugo/content/AR/19.md rel=noopener>Edit Source</a></p><ul class=tags></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents></nav></details></aside><a href=#pagerank><h1 id=pagerank><span class=hanchor arialabel=Anchor># </span>PageRank</h1></a><p>Mentre con l&rsquo;algoritmo
+<a rel=noopener class="internal-link broken" data-src=./18.html>HITS</a> la rilevanza di una pagina
+dipende da quante pagine è putanta e a quante punta, esistono contesti
+in cui la rilevanza non dipende dal numero bensì dalla <strong>qualità</strong> dei
+link. Ovvero ci sono situazioni in cui l&rsquo;approvazione è vista come un
+passaggio diretto da una pagina importante ad un&rsquo;altra. Per esempio, se
+un articolo <code>X</code> molto importante cita un articolo <code>Y</code>, allora <code>Y</code>
+prenderà rilevanza. Simmetricamente, se <code>X</code> cita molti articoli
+importanti allora probabilmente il suo contenuto sarà rilevante per la
+ricerca.<br>Questo concetto è quello su cui si basa l&rsquo;algoritmo <strong>PageRank</strong> per
+determinare la rilevanza delle pagine rispetto a una ricerca. Tale
+modello prende il nome da
+<a href=https://it.wikipedia.org/wiki/Larry_Page rel=noopener>Larry
+Page</a>, fondatore di Google da
+cui il nome.<br>Tale algoritmo è ancora una volta un metodo iterativo, basato però
+sull&rsquo;analisi dei soli [link entranti]{.underline} in una pagina. Ovvero
+solamente i link che puntano ad una pagina <code>X</code> saranno utili per
+definirne la sua rilevanza.<br>Tale algoritmo parte dall&rsquo;assunzione che nella porzione di rete
+attinente alla ricerca sia presente una unità di <strong>flusso</strong> inizialmente
+distribuita in maniera equa fra tutti i nodi, ovvero se ci sono $n$
+allora inizialmente ognino possiede frazione $1/n$ di flusso.<br>In maniera intutitva, durante le iterazioni dell&rsquo;algoritmo, ogni nodo
+redistribuisce la propria frazione di flusso alle pagine che punta. Alla
+fine, dopo un certo numero di iterazioni, la pagina che avrà una
+frazione più alta sarà quella più rilevante per la ricerca.<br>Formalmente indichiamo con $$
+f^{(0)}_i = \frac{1}{n}
+$$ la quantità [iniziale]{.underline} di flusso del nodo $i$-esimo,
+per $i=1,&mldr;,n$.<br>Ad ogni passo, ogni nodo redistribuisce la propria quantità di flusso
+lungo i suoi archi uscenti in maniera <strong>uniforme</strong>. Perciò avremo che $$
+f^{(k+1)}<em>i = \sum</em>{1 \leq j \leq n :\j \rightarrow i} \frac{f^{(k)}_j}{d^{(out)}_j}
+$$ dove $d^{(out)}_j$ indica il [grado uscente]{.underline} di $j$,
+ovvero il numero di nodi puntati da $j$ all&rsquo;interno del sottografo
+indotto dalle sole pagine inerenti alla ricerca.<br>Per notazione indichiamo con $f^{(k)} = (f^{(k)}_1, &mldr;, f^{(k)}_n)$ il
+vettore delle quantità di flusso degli $n$ al tempo $k$.</p><blockquote><p>Se il sottografo indotto dalle pagine attinenti alla ricerca è
+[fortemente connesso]{.underline} allora esiste ed è unico il limite
+$$
+\lim_{k \rightarrow \infty} f^{(k)} = f^*
+$$</p></blockquote><p>Sotto l&rsquo;assunzione di connessione forte, è facile osservare che la
+quantità di flusso globale rimane sempre 1.<br>Possiamo quindi pensare al limite $f^*$ come una <strong>configurazione di
+equilibrio</strong> in cui $$
+f^*<em>i = \sum</em>{1 \leq j \leq n :\j \rightarrow i} \frac{f^*_j}{d^{(out)}_j} ;;; \forall i=1,&mldr;,n
+$$</p><p><img src=https://Alessandrostr95.github.io//../images/ar-lesson19-img1.png width=auto alt="Configurazione di equilibrio $f^*$ (porvare per
+credere).">{width=&ldquo;100%&rdquo;
+style=&ldquo;max-width: 500px;&rdquo;}</p><p>Ovviamente la condizione che il grafo sia fortemente connesso è
+<strong>necessaria</strong> per il correto funzionamento, in quanto se non fosse
+fortemente connesso tutto il flusso andrebbe a finire tutto in
+[componenti pozzo]{.underline}.<br>Perciò è necessario modificare opportunamente il PageRank per evitare
+tutto il flusso si accumuli in componenti pozzo. Una versione modificata
+è il noto <strong>Scaled PageRank</strong> nel quale ogni pagina
+[preserva]{.underline} un propria porzione di flusso per evitare che
+tutto si accumuli nei <em>&ldquo;vicoli ciechi&rdquo;</em>.<br>Più precisamente, fissato un parametro $s \in \left[ 0,1 \right]$, e ad
+ogni iterazione:</p><ul><li>una frazione $s$ del flusso di ogni nodo viene redistribuito
+uniformemente sugli archi uscenti come nel PageRank calssico.</li><li>mentre la frazione rimanente $(1-s)$ di ciascun nodo viene
+ridistribuita sul tutto il grafo in maniera uniforme.</li></ul><p>Percò, dato che il flusso globale di tutta la sottorete è sempre 1,
+avremo che ad ogni iterazione ogni nodo riceverà una quantità di flusso
+di [almeno]{.underline} $(1-s)/n$.<br>Per distiguere, indichiamo con $r^{(k)}_i$ la quantità di flusso
+posseduta dal nodo $i$ all&rsquo;iterazione $k$ nello Scaled Page Rank.
+D&rsquo;ora in avanti ci riferiremo ad esso con il termine di <strong>rank</strong>, e non
+più di flusso.<br>La formula ricorsiva per calcolare il rank di un nodo al tempo $k+1$ è</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{equation}
+</span></span><span class=line><span class=cl>  r^{(k+1)}_i = \Big( \sum_{1 \leq j \leq n :\\j \rightarrow i} s \cdot \frac{r^{(k)}_j}{d^{(out)}_j} \Big) + \frac{1-s}{n}
+</span></span><span class=line><span class=cl>\end{equation}
+</span></span></code></pre></td></tr></table></div></div><p>Dato un vettore di ranking
+$r^{(k)} = (r^{(k)}_1, r^{(k)}_2, &mldr;, r^{(k)}_n)$ la tempo $k$,
+difiniamo con $N$ la matrice $n \times n$ che descirve il processo
+iterativo, ovvero tale che $$
+r^{(k+1)} = N r^{(k)}
+$$</p><p>Per definizione la matrice $N$ è definita come segue $$
+N [ i,j ] = \begin{cases}
+\frac{s}{d^{(out)}_j} + \frac{1-s}{n} &\mbox{se } j \rightarrow i\\\frac{1-s}{n} &\mbox{altrimenti}
+\end{cases} ;; \forall 1 \leq i,j \leq n
+$$ Infatti avremo che il ranking $i$-esimo di $r^{(k+1)}$ sarà</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    r^{(k+1)} = \sum_{j = 1}^{n} N [ i,j ] r^{(k)}_j &amp;= \bigg( \sum_{1 \leq j \leq n :\\ j \rightarrow i} \Big( \frac{s}{d^{(out)}_j} + \frac{1-s}{n} \Big) r^{(k)}_j \bigg) + \bigg( \sum_{1 \leq j \leq n :\\ j \not\to i} \frac{1-s}{n}r^{(k)}_j \bigg)\\
+</span></span><span class=line><span class=cl>    &amp;= \bigg( \sum_{1 \leq j \leq n :\\ j \rightarrow i} \frac{s}{d^{(out)}_j}r^{(k)}_j \bigg) + \bigg( \sum_{j = 1}^{n} \frac{1-s}{n}r^{(k)}_j \bigg)\\
+</span></span><span class=line><span class=cl>    &amp;= \bigg( \sum_{1 \leq j \leq n :\\ j \rightarrow i} \frac{s}{d^{(out)}_j}r^{(k)}_j \bigg) + \frac{1-s}{n}\underbrace{\bigg( \sum_{j = 1}^{n} r^{(k)}_j \bigg)}_{\scriptsize{\mbox{tutto il flusso}}}\\
+</span></span><span class=line><span class=cl>    &amp;= \bigg( \sum_{1 \leq j \leq n :\\ j \rightarrow i} \frac{s}{d^{(out)}_j}r^{(k)}_j \bigg) + \frac{1-s}{n}
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>ovvero la definizione data nell&rsquo;eq. (1).<br>Anche in questo caso possiamo pensare al vettore $r^<em>$ che definisce una
+<strong>configurazione di equilibrio</strong>, ovvero tale che $$
+r^</em> = Nr^*
+$$</p><p>Osserviamo che $r^*$ (se esiste) è un autovettore di $N$ con le seguenti
+proprietà:</p><ul><li>il rispettivo autovalore è $\lambda = 1$.</li><li>la somma degli elementi di $r^*$ è pari a 1.</li><li>ha tutti elementi [non negativi]{.underline}.</li><li>possibilmente che $r^*$ è l&rsquo; [unico]{.underline} autovettore con
+tali prorpietà (così da avere un unico punto di convergenza).</li></ul><p>Ma chi ci assicura che tale autovettore (con relativo autovalore)
+esista?</p><blockquote><p>*Teorema di Perron*<br>Sia $A$ un matrice $n \times n$ con valori [reali
+positivi]{.underline}, allora</p><ul><li>$A$ ha un autovalore $c \in \mathbb{R}^+$ tale che
+$c > \vert c&rsquo; \vert$ per ogni altro autovalore $c&rsquo;$ di $A$.</li><li>l&rsquo;autovettore di $A$ corrispondente a $c$ è [unico]{.underline}
+ed ha elementi [reali positivi]{.underline} la cui somma è pari
+a 1.</li></ul></blockquote><p>La nostra matrice $N$ rispetta tali condizioni, perciò possiamo
+applicare il teorema di <em>Perron</em> e dire che esiste una coppia
+autovalore-autovettore $(r^<em>, c)$ che rispetta le porprietà. Se
+potessimo anche essere certi $c = 1$ potremmo concludere che
+$r^</em> = N r^*$.<br>Per fortuna esiste un teorema che ci viene in salvo.</p><blockquote><p>*Teorema*<br>Sia $A$ una matrice stocastica, ovvero una matrice
+[quadrata]{.underline} $n \times n$ la cui somma degli elementi su
+ciascuna riga (o colonna) è pari a 1. Allora $A$ ha un autovalore
+$\lambda$ tale che $\lambda = 1$ e $\lambda$ è l&rsquo;autovalore di
+[modulo massimo]{.underline}.</p></blockquote><p>Osserviamo che $N$ è una matrice stocastica per colonne. Infatti, poiché
+è vero che fissato un nodo $j$ avremo che $$
+\sum_{1 \leq i \leq n :\\j \to i} \frac{1}{d^{(out)}_j}
+$$ (convincersi di questo prima di proseguire) allora</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    \sum_{1 \leq i \leq n} N [ i,j ] &amp;= \Big( \sum_{1 \leq i \leq n :\\ j \to i} \frac{s}{d^{(out)}_j} + \frac{1 - s}{n} \Big) + \Big( \sum_{1 \leq i \leq n :\\ j \not\to i} \frac{1 - s}{n} \Big)\\
+</span></span><span class=line><span class=cl>    &amp;= \Big( \sum_{1 \leq i \leq n :\\ j \to i} \frac{s}{d^{(out)}_j} \Big) + \Big( \sum_{1 \leq i \leq n} \frac{1 - s}{n} \Big)\\
+</span></span><span class=line><span class=cl>    &amp;= s + (1-s) = 1
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>In conclusione per il teorema di <em>Perron</em> e per quello sulle matrici
+stocastiche averemo che l&rsquo;algoritmo Scaled PageRank converge ad un
+<strong>punto fisso</strong> $r^* = Nr^*$.</p><blockquote><p>*Esempio Matrice Stocastica*<br>$$N = \left [
+\begin{array}{ccc}
+\frac{1-s}{3} & \frac{s}{2} + \frac{1-s}{3} & s +\frac{1-s}{3}\\s + \frac{1-s}{3} & \frac{1-s}{3} & \frac{1-s}{3}\\\frac{1-s}{3} & \frac{s}{2} + \frac{1-s}{3} & \frac{1-s}{3}
+\end{array}
+\right ]$$</p><p><img src=https://Alessandrostr95.github.io//../images/ar-lesson19-img2.png width=auto alt="Sottografo indotto dalle pagine inerenti alla
+ricerca">{width=&ldquo;100%&rdquo;
+style=&ldquo;max-width: 250px;&rdquo;}</p></blockquote><a href=#pagerank-e-random-walk><h1 id=pagerank-e-random-walk><span class=hanchor arialabel=Anchor># </span>PageRank e Random Walk</h1></a><p>Abbiamo visto concettualmente che l&rsquo;idea dietro al PageRank è quella di
+avere una sorta di fluido che <em>&ldquo;scorre&rdquo;</em> tra le pagine individuate
+essere inerenti alla ricerca.<br>Esiste una relazione tra questo concetto di fluido e le cosidette
+<strong>Random Walk</strong>, o <strong>percorso aleatorio</strong>. Una Random Walk funziona
+nella seguente maniera:</p><ul><li>dato un grafo $G$ scegliamo [uniformemente a caso]{.underline} un
+nodo $u$ da cui iniziare il percorso.</li><li>al passo successivo passiamo da $u$ ad uno dei suoi vicini in
+maniera del tutto [uniforme]{.underline}.</li><li>e così via&mldr;</li></ul><p>Cerchiamo di calcolare la probabilità di trovarsi su di un dato nodo $i$
+dopo una random walk lunga $k$ passi. Più formalmente, per ogni
+$i \in V$ indichiamo con $w^{(k)}_i$ la v.a. binaria che:</p><ul><li>vale 1 se dopo $k$ passi del random walk ci troviamo esattamente sul
+nodo 1.</li><li>0 altrimenti.</li></ul><p>Scegliendo il primo noto della random walk in maniera uniforme avremo
+che $$
+\mathcal{P}(w^{(0)}_i = 1) = \frac{1}{n} = f^{(0)}_i
+$$</p><p>Al tempo $k = 1$ avremo invece che la probabilità che il cammino
+aleatoria finisca sul nodo $i$ è pari alla probabilità che un suo vicino
+$j$ sia il nodo iniziale del cammino, moltiplicata per la probabilità
+che $j$ si passi esattamente ad $i$.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    \mathcal{P}(w^{(1)}_i = 1) &amp;= \sum_{j \in V:\\ j \to i} \left( \mathcal{P}(w^{(0)}_j = 1) \cdot \frac{1}{d^{(out)}_j} \right)\\
+</span></span><span class=line><span class=cl>    \sum_{j \in V:\\ j \to i} \frac{f^{(0)}_j}{d^{(out)}_j} = f^{(1)}_i
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>In maniera induttiva per ogni $k > 0$</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    \mathcal{P}(w^{(k+1)}_i = 1) &amp;= \sum_{j \in V:\\ j \to i} \left( \mathcal{P}(w^{(k)}_j = 1) \cdot \frac{1}{d^{(out)}_j} \right)\\
+</span></span><span class=line><span class=cl>    \sum_{j \in V:\\ j \to i} \frac{f^{(k)}_j}{d^{(out)}_j} = f^{(k+1)}_i
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>Ovvero la quantità di flusso del nodo $i$ dopo $k$ iterazioni e pari
+alla probabilità di finire esattamente sul nodo $i$ dopo $k$ passi del
+random walk.<br>Consideriamo una versione &ldquo;scalata&rdquo; del random walk per lo <em>Scaled
+PageRank</em>. Le regole di questa versione di random walk sono:</p><ul><li>fissare un parametro $s \in [ 0,1 ]$.</li><li>scegliere [uniformemente a caso]{.underline} un nodo iniziale $u$ da
+cui partire.</li><li>da $u$:<ul><li>con probabilità $s$ proseguiamo la random walk, ovvero scegliamo
+[uniformemente a caso]{.underline} un suo vicino su cui
+avviarci.</li><li>con probabilità $1 - s$ rincominciamo la random walk, ovvero
+scegliamo [uniformemente a caso]{.underline} un altro nodo del
+grafo da cui iniziare.</li></ul></li><li>e così via&mldr;</li></ul><p>Pper ogni nodo $i \in V$ indichiamo con $\omega^{(k)}_i$ la v.a. binaria
+che:</p><ul><li>vale 1 se dopo $k$ passi del random walk ci troviamo esattamente sul
+nodo 1.</li><li>0 altrimenti.</li></ul><p>Come prima abbiamo che $$
+\mathcal{P}(\omega^{(0)}_i = 1) = \frac{1}{n} = r^{(0)}_i
+$$ per $k = 1$</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    \mathcal{P}(\omega^{(1)}_i = 1) &amp;= s \cdot \Big( \sum_{j \in V:\\ j \to i} \mathcal{P}(\omega^{(0)}_j = 1) \cdot \frac{1}{d^{(out)}_j} \Big) + (1-s) \cdot \frac{1}{n}\\
+</span></span><span class=line><span class=cl>    &amp;= \sum_{j \in V:\\ j \to i} \Big( s \cdot \frac{r^{(0)}_j}{d^{(out)}_j} \Big) + \frac{1 - s}{n}\\
+</span></span><span class=line><span class=cl>    &amp;= r^{(1)}_i
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>e quindi più in generale</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>\begin{align*}
+</span></span><span class=line><span class=cl>    \mathcal{P}(\omega^{(k+1)}_i = 1) &amp;= s \cdot \Big( \sum_{j \in V:\\ j \to i} \mathcal{P}(\omega^{(k)}_j = 1) \cdot \frac{1}{d^{(out)}_j} \Big) + (1-s) \cdot \frac{1}{n}\\
+</span></span><span class=line><span class=cl>    &amp;= \sum_{j \in V:\\ j \to i} \Big( s \cdot \frac{r^{(k)}_j}{d^{(out)}_j} \Big) + \frac{1 - s}{n}\\
+</span></span><span class=line><span class=cl>    &amp;= r^{(k+1)}_i
+</span></span><span class=line><span class=cl>\end{align*}
+</span></span></code></pre></td></tr></table></div></div><p>Ovvero lo scaled rank di una pagina $i$ dopo $k$ iterazioni
+dell&rsquo;algoritmo <em>Scaled PageRank</em> equivale alla probabilità di trovarsi
+esattamente sul nodo $i$ dopo $k$ passi di questo scaled random walk.</p><a href=#modern-web-search><h1 id=modern-web-search><span class=hanchor arialabel=Anchor># </span>Modern Web Search</h1></a><p>L&rsquo;enorme crescita del Web, in termini di numero di pagine e numero di
+argomenti trattati, ha richiesto col tempo di raffinare le vecchie
+tecniche di link analysis e web search. Una tecnica è quella di
+analizzare i link combinando il <strong>contenuto</strong> delle pagine, come per
+esempio usando gli <strong>anchor text</strong>, ovvero delle parole chiave che
+descrivono in qualche maniera il contenuto di un link. Oppure ancora
+considerando con quale frequenza o quante volte una pagina viene
+effettivamente aperta.<br>Spesso ci sono anche motivi commerciali per cercare di apparire primi
+nei ranking di una ricerca. Infatti è nata una vera e propria industria
+dietro le tecniche di ranking. Da una parte ci sono i web designer che
+cercano di comprendere gli algoritmi di ranking usati dai motori di
+ricerca, e cercano un modo per poterli sfruttare a loro vantaggio.
+D&rsquo;altra parte ci sono i progettisti di motori di ricerca che vengono
+indotti nel cercare di modificare è migliorare i propri algoritmi di
+ranking. Ecco perché gli algoritmi di ranking effettivi vengono spesso
+tenuti segreti.</p><hr></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://Alessandrostr95.github.io/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p>Made by Alessandro Straziota using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2022</p><ul><li><a href=https://Alessandrostr95.github.io/>Home</a></li><li><a href=https://twitter.com/Alessandro_357>Twitter</a></li><li><a href=https://github.com/Alessandrostr95>Github</a></li></ul></footer></div></div></body></html>

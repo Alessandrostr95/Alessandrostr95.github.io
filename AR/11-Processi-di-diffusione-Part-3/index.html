@@ -1,0 +1,127 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=description content="Lezioni predenti collegate:
+← Lezione 9 ← Lezione 10 Processi di diffusione in presenza di Compatibilità Nelle lezioni precedenti abbiamo visto come un gioco di coordinazione molto semplice possa portare ad una vasta quantità di domande e relative analisi non banali."><title>🪴 Alessandro Straziota's Notes</title><meta name=viewport content="width=device-width,initial-scale=1"><link rel="shortcut icon" type=image/png href=https://Alessandrostr95.github.io//icon.png><link href=https://Alessandrostr95.github.io/styles.b3e1e36b0403ac565c9392b3e23ef3b6.min.css rel=stylesheet><link href=https://Alessandrostr95.github.io/styles/_light_syntax.86a48a52faebeaaf42158b72922b1c90.min.css rel=stylesheet id=theme-link><script src=https://Alessandrostr95.github.io/js/darkmode.ff3928c070aaa41dd4e6a0d10ab7e115.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/util.9825137f5e7825e8553c68ce39ac9e44.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css integrity=sha384-R4558gYOUz8mP9YWpZJjofhk+zx0AS11p36HnD2ZKj/6JR5z27gSSULCNHIRReVs crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js integrity=sha384-z1fJDqw8ZApjGO3/unPWUPsIymfsJmyrDVWC8Tv/a1HeOtGmkwNd/7xUS0Xcnvsx crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js integrity=sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR crossorigin=anonymous></script>
+<script src=https://unpkg.com/@floating-ui/core@0.7.3></script>
+<script src=https://unpkg.com/@floating-ui/dom@0.5.4></script>
+<script src=https://Alessandrostr95.github.io/js/popover.abe6a51cc7138c5dff00f151dd627ad1.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/code-title.b35124ad8db0ba37162b886afb711cbc.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/clipboard.c20857734e53a3fb733b7443879efa61.min.js></script>
+<script src=https://Alessandrostr95.github.io/js/callouts.7723cac461d613d118ee8bb8216b9838.min.js></script>
+<script>const BASE_URL="https://Alessandrostr95.github.io/",fetchData=Promise.all([fetch("https://Alessandrostr95.github.io/indices/linkIndex.12ce054d07db7354a1a118a75dec1a5f.min.json").then(e=>e.json()).then(e=>({index:e.index,links:e.links})),fetch("https://Alessandrostr95.github.io/indices/contentIndex.068b8904bb64a00c9464ed48895ebd2f.min.json").then(e=>e.json())]).then(([{index:e,links:t},n])=>({index:e,links:t,content:n})),render=()=>{const e=new URL(BASE_URL),t=e.pathname,n=window.location.pathname,s=t==n;addCopyButtons(),addTitleToCodeBlocks(),addCollapsibleCallouts(),initPopover("https://Alessandrostr95.github.io",!0,!0);const o=document.getElementById("footer");if(o){const e=document.getElementById("graph-container");if(!e)return requestAnimationFrame(render);e.textContent="";const t=s&&!1;drawGraph("https://Alessandrostr95.github.io",t,[{"/moc":"#4388cc"}],t?{centerForce:1,depth:-1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.5,linkDistance:1,opacityScale:3,repelForce:1,scale:1.4}:{centerForce:1,depth:1,enableDrag:!0,enableLegend:!1,enableZoom:!0,fontSize:.6,linkDistance:1,opacityScale:3,repelForce:2,scale:1.2})}},init=(e=document)=>{addCopyButtons(),addTitleToCodeBlocks(),renderMathInElement(e.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1})}</script><script type=module>
+    import { attachSPARouting } from "https:\/\/Alessandrostr95.github.io\/js\/router.9d4974281069e9ebb189f642ae1e3ca2.min.js"
+    attachSPARouting(init, render)
+  </script></head><body><div id=search-container><div id=search-space><input autocomplete=off id=search-bar name=search type=text aria-label=Search placeholder="Search for something..."><div id=results-container></div></div></div><script src=https://cdn.jsdelivr.net/npm/flexsearch@0.7.21/dist/flexsearch.bundle.js integrity="sha256-i3A0NZGkhsKjVMzFxv3ksk0DZh3aXqu0l49Bbh0MdjE=" crossorigin=anonymous defer></script>
+<script defer src=https://Alessandrostr95.github.io/js/full-text-search.24827f874defbbc6d529926cbfcfb493.min.js></script><div class=singlePage><header><h1 id=page-title><a href=https://Alessandrostr95.github.io/>🪴 Alessandro Straziota's Notes</a></h1><div class=spacer></div><div id=search-icon><p>Search</p><svg tabindex="0" aria-labelledby="title desc" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title id="title">Search Icon</title><desc id="desc">Icon to open search</desc><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"/><circle cx="8" cy="8" r="7"/></g></svg></div><div class=darkmode><input class=toggle id=darkmode-toggle type=checkbox tabindex=-1>
+<label id=toggle-label-light for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="dayIcon" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35"><title>Light Mode</title><path d="M6 17.5C6 16.672 5.328 16 4.5 16h-3C.672 16 0 16.672.0 17.5S.672 19 1.5 19h3C5.328 19 6 18.328 6 17.5zM7.5 26c-.414.0-.789.168-1.061.439l-2 2C4.168 28.711 4 29.086 4 29.5 4 30.328 4.671 31 5.5 31c.414.0.789-.168 1.06-.44l2-2C8.832 28.289 9 27.914 9 27.5 9 26.672 8.329 26 7.5 26zm10-20C18.329 6 19 5.328 19 4.5v-3C19 .672 18.329.0 17.5.0S16 .672 16 1.5v3C16 5.328 16.671 6 17.5 6zm10 3c.414.0.789-.168 1.06-.439l2-2C30.832 6.289 31 5.914 31 5.5 31 4.672 30.329 4 29.5 4c-.414.0-.789.168-1.061.44l-2 2C26.168 6.711 26 7.086 26 7.5 26 8.328 26.671 9 27.5 9zM6.439 8.561C6.711 8.832 7.086 9 7.5 9 8.328 9 9 8.328 9 7.5c0-.414-.168-.789-.439-1.061l-2-2C6.289 4.168 5.914 4 5.5 4 4.672 4 4 4.672 4 5.5c0 .414.168.789.439 1.06l2 2.001zM33.5 16h-3c-.828.0-1.5.672-1.5 1.5s.672 1.5 1.5 1.5h3c.828.0 1.5-.672 1.5-1.5S34.328 16 33.5 16zM28.561 26.439C28.289 26.168 27.914 26 27.5 26c-.828.0-1.5.672-1.5 1.5.0.414.168.789.439 1.06l2 2C28.711 30.832 29.086 31 29.5 31c.828.0 1.5-.672 1.5-1.5.0-.414-.168-.789-.439-1.061l-2-2zM17.5 29c-.829.0-1.5.672-1.5 1.5v3c0 .828.671 1.5 1.5 1.5s1.5-.672 1.5-1.5v-3C19 29.672 18.329 29 17.5 29zm0-22C11.71 7 7 11.71 7 17.5S11.71 28 17.5 28 28 23.29 28 17.5 23.29 7 17.5 7zm0 18c-4.136.0-7.5-3.364-7.5-7.5s3.364-7.5 7.5-7.5 7.5 3.364 7.5 7.5S21.636 25 17.5 25z"/></svg></label><label id=toggle-label-dark for=darkmode-toggle tabindex=-1><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="nightIcon" viewBox="0 0 100 100" style="enable-background='new 0 0 100 100'"><title>Dark Mode</title><path d="M96.76 66.458c-.853-.852-2.15-1.064-3.23-.534-6.063 2.991-12.858 4.571-19.655 4.571C62.022 70.495 50.88 65.88 42.5 57.5 29.043 44.043 25.658 23.536 34.076 6.47c.532-1.08.318-2.379-.534-3.23-.851-.852-2.15-1.064-3.23-.534-4.918 2.427-9.375 5.619-13.246 9.491-9.447 9.447-14.65 22.008-14.65 35.369.0 13.36 5.203 25.921 14.65 35.368s22.008 14.65 35.368 14.65c13.361.0 25.921-5.203 35.369-14.65 3.872-3.871 7.064-8.328 9.491-13.246C97.826 68.608 97.611 67.309 96.76 66.458z"/></svg></label></div></header><article><p class=meta>Last updated
+Unknown
+<a href=https://github.com/Alessandrostr95/quartz/tree/hugo/content/AR/11%20-%20Processi%20di%20diffusione%20-%20Part%203.md rel=noopener>Edit Source</a></p><ul class=tags></ul><aside class=mainTOC><details><summary>Table of Contents</summary><nav id=TableOfContents><ol><li><a href=#analisi>Analisi</a></li></ol></nav></details></aside><p>Lezioni predenti collegate:</p><ul><li><a href=/AR/9-Processi-di-diffusione-Part-1/ rel=noopener class=internal-link data-src=/AR/9-Processi-di-diffusione-Part-1/>← Lezione 9</a></li><li><a href=/AR/10-Processi-di-diffusione-Part-2/ rel=noopener class=internal-link data-src=/AR/10-Processi-di-diffusione-Part-2/>← Lezione 10</a></li></ul><a href=#processi-di-diffusione-in-presenza-di-compatibilità><h1 id=processi-di-diffusione-in-presenza-di-compatibilità><span class=hanchor arialabel=Anchor># </span>Processi di diffusione in presenza di Compatibilità</h1></a><p>Nelle lezioni precedenti abbiamo visto come un gioco di coordinazione molto semplice possa portare ad una vasta quantità di domande e relative analisi non banali.
+Una prima generalizzazione è stata passare da un modello <em>omogeneo</em>, in cui tutti i nodi traevano uno stesso vantaggio dall&rsquo;adottare una nuova tecnologia <code>A</code>, ad uno <em>eterogeneo</em>, in cui ciascun individuo ricava un personale guadagno dall&rsquo;adottare l&rsquo;innovazione.</p><p>In tutti i modelli analizzati però si assumeva la <strong>mutua esclusione</strong> degli stati <code>A-B</code>. In un contesto reale però succede spesso che due stati coesistono in un individuo.
+Ad esempio, <code>A</code> e <code>B</code> potrebbero essere lingue diverse che coesistono lungo un confine nazionale, oppure <code>A</code> e <code>B</code> potrebbero essere due applicazioni di messaggistica differenti.</p><p>Infatti gli individui che si trovano al confine tra un&rsquo;area in cui prevale <code>A</code> ed una in cui prevale <code>B</code>, conviene adottare entrambi gli stati: ovvero essere in qualche modo &ldquo;bilingua&rdquo;.</p><p>Adottare però due stati contemporaneamente può comportare un costo aggiuntivo non trascurabile.
+Un individuo sceglie di utilizzare entrambi i comportamenti disponibili, barattando la maggiore facilità di interazione con persone di più tipi, contro il costo di dover acquisire e mantenere entrambe le forme di comportamento (cioè i costi di dover imparare una lingua aggiuntiva, mantenere due diverse versioni di una tecnologia e così via &mldr;).</p><p>Un&rsquo;oservazione da fare riguardo il costo del &ldquo;bilinguismo&rdquo;, è che tale <em>effort</em><sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> viene pagato <u>una sola volta</u>.
+Perciò, se si è in contatto con tanta gente nello stato <code>A</code> ed altrettanta nello stato <code>B</code>, potrebbe convenire adottare il doppio stato <code>AB</code>, in qunato il guadagno ricavato sarebbe molto maggiore dell&rsquo;unico costo che pago nell&rsquo;avere il doppio stato: <em>il gioco ne vale la candela</em>.</p><p>Modellando in maniera più formale, possiamo definire un nuovo <em>coordination game</em> in accordo alla seguente tabella</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img1.png width=auto alt="Nuovo coordination game con opzione di doppio stato (bilingua)."></p><p>dove con $(a,b)^+$ si indica il massimo tra $a$ e $b$.</p><p>Indichiamo ora con $V_A, V_B, V_{AB}$ l&rsquo;insieme dei nodi negli stati <code>A</code>, <code>B</code> e <code>AB</code> rispettivamente, i quali compongono una <em>partizione</em> dell&rsquo;insieme $V$ di tutti gli individui.
+Perciò, fissando con $c \geq 0$ il costo di adozione del <em>doppio stato</em> <code>AB</code>, possiamo dire che il guadagno complessivo del nodo $u$ che adotta <code>AB</code> è pari a $$\Big(\sum_{v \in N(u) \cap V_A} a\Big) + \Big(\sum_{v \in N(u) \cap V_B} b\Big) + \Big(\sum_{v \in N(u) \cap V_{AB}} (a,b)^+\Big) - c$$</p><p>Indichiamo quindi con $p_A(u), p_B(u), p_{AB}(u)$ i rispettivi guadagni che ha il nodo $u$ nell&rsquo;assumere gli stati <code>A</code>, <code>B</code> o <code>AB</code> come segue</p><p>$$
+\begin{align*}
+p_A(u) &= \sum_{v \in N(u) \cap V_A} a + \sum_{v \in N(u) \cap V_{AB}} a \\p_B(u) &= \sum_{v \in N(u) \cap V_B} b + \sum_{v \in N(u) \cap V_{AB}} b\\p_{AB}(u) &= \Big(\sum_{v \in N(u) \cap V_A} a\Big) + \Big(\sum_{v \in N(u) \cap V_B} b\Big) + \Big(\sum_{v \in N(u) \cap V_{AB}} (a,b)^+\Big) - c
+\end{align*}
+$$</p><p>Per rendere meglio le idee consideriamo un esempio.
+Consideriamo ancora una volta la catenta infinita $\mathbb{Z}$, e poniamo come parametri $(a,b,c) = (5,3,1)$.
+Supponiamo di partire da un solo nodo iniziatore $u$, e senza perdita di generalità consideriamo solamente lo sviluppo del porcesso alla sua destra (tanto a sinistra è simmetrico).</p><p>Prendiamo il nodo $v$ alla usa destra.
+I suoi guadagni nell&rsquo;essere negli stati <code>A</code>, <code>B</code> e <code>AB</code> saranno
+$$
+\begin{align*}
+p_A(v) &= 5\\p_B(v) &= 3\\p_{AB}(v) &= 5+3-1 = 7
+\end{align*}
+$$</p><p>Perciò a $v$ converrà diventare <em>bilingua</em> e adottare il doppio stato <code>AB</code>.</p><p>Consideriamo ora il succesivo nodo $w$ sulla destra. I suoi guadagni saranno
+$$
+\begin{align*}
+p_A(w) &= 5\\p_B(w) &= 3+3 = 6\\p_{AB}(w) &= 5+3-1 = 7
+\end{align*}
+$$
+Perciò anche a $w$ converrà passare ad <code>AB</code>.</p><p>Adesso, la situazione rispetto a $v$ è cambiata, in quanto ora ha un vicino nello stato <code>A</code> ed uno nello stato <code>AB</code>.
+Infatti anche i suoi guadagni sono ora cambiati, e risultano essere
+$$
+\begin{align*}
+p_A(v) &= 10\\p_B(v) &= 3\\p_{AB}(v) &= 5+5-1 = 9
+\end{align*}
+$$</p><p>perciò ora $v$ passa nello stato <code>A</code>.</p><p>È facile convincersi che si genera una cascata completa di <code>A</code>.</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img2.gif width=auto alt="$(a,b,c) = (5,3,1)$ e $V_0 = \lbrace u \rbrace$."></p><p>Analizzeremo ora il processo di diffusione nel nuovo modello con compatibilità, e cercheremo di capire in quali situazioni si ha una cascata completa.</p><a href=#analisi><h2 id=analisi><span class=hanchor arialabel=Anchor># </span>Analisi</h2></a><p>Dalle precedenti lezioni sappiamo che nel modello omogeneo, <code>A</code> <u>non</u> si diffonde su reti infinite di grado finito se la sua soglia d&rsquo;adozione è $q > \frac{1}{2}$, ovvero se $a$ non è <strong>almeno</strong> pari al valore di $b$.</p><p>Uno studio di <em>Kleinberg</em> del 2007 ha invece dimostrato uno strano comportamento riguardo il modello con compatibilità, ovvero che:</p><ul><li><code>A</code> si diffonde facilmente se $a$ è parecchio più grande di $c$ (<strong>ragionevole</strong>)</li><li><code>A</code> fa fatica a diffondersi se $c$ è parecchio grande rispetto ad $a$ (<strong>ragionevole</strong>)</li><li><code>A</code> fa fatica a diffondersi anche se $c$ non è molto grande rispetto ad $a$ (<strong>strano</strong>)</li></ul><p>Analizziamo cosa succede nella rete infinita più semplice, la catena infinita $\mathbb{Z}$.</p><p>Dato che fare un&rsquo;analisi su tre parametri $a,b,c$ risulta molto complessa, conviene <strong>normalizzare</strong> $b$ ad 1, e quindi descrivere il processo solo in funzione di $a(b) = a$ e $c$.
+Perciò, in questo modello semplificato (ma non meno espressivo) la soglia d&rsquo;adozione di <code>A</code> sarà $$q(b) = q = \frac{1}{a+1}$$
+Consideriamo la situazione in cui c&rsquo;è un unico nodo iniziatore $x$.
+Il suo vicino $u$ avrà un vicino in $V_A$ e l&rsquo;altro in $V_B$.</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img3.png width=auto alt="Il nodo $u$ deve scegliere quale stato conviene adottare."></p><p>Avremo che i guadagni nell&rsquo;adottare uno stato sono
+$$
+\begin{align*}
+p_A(u) &= a\\p_B(u) &= 1\\p_{AB}(u) &= a + 1 - c
+\end{align*}
+$$
+Sicuramente $u$ assume <code>A</code> se $p_A(u) \geq p_B(u)$ e se $p_A(u) \geq p_{AB}(u)$
+$$
+\begin{equation}
+\begin{cases}
+p_A(u) \geq p_B(u)\\p_A(u) \geq p_{AB}(u)
+\end{cases}
+\implies
+\begin{cases}
+a \geq 1\\c \geq 1
+\end{cases}
+\end{equation}
+$$</p><p>Invece, $u$ rimane nello stato <code>B</code> se $p_B(u) > p_A(u)$ e se $p_B(u) > p_{AB}(u)$
+$$
+\begin{equation}
+\begin{cases}
+p_b(u) \geq p_A(u)\\p_b(u) \geq p_{AB}(u)
+\end{cases}
+\implies
+\begin{cases}
+a &lt; 1\\a &lt; c
+\end{cases}
+\end{equation}
+$$</p><p>Infine, $u$ adotta il bilinguismo <code>AB</code> se $p_{AB}(u) > p_A(u)$ e se $p_{AB}(u) \geq p_B(u)$
+$$
+\begin{equation}
+\begin{cases}
+p_{AB}(u) > p_A(u)\\p_{AB}(u) \geq p_B(u)
+\end{cases}
+\implies
+\begin{cases}
+c &lt; 1\\c \leq a
+\end{cases}
+\end{equation}
+$$
+Possiamo riassumere tutto in un grafico con assi $a$-$c$.</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img4.png width=auto alt="Grafico $a$-$c$."></p><p>Dalle precedenti osservazioni possiamo trarre due prime conclusioni:</p><ul><li>se il nodo $u$ rimane nello stato <code>B</code>, allora la diffusione di <code>A</code> è bloccata e non potrà mai più procedere in alcun modo.</li><li>se $u$ invece passa <u>direttamente</u> allo stato <code>A</code>, allora certamente avverrà una cascata completa di <code>A</code> in maniera diretta, senza transitare mai per <code>AB</code>.</li></ul><p>Resta ora da capire che succede se $u$ passa allo stato <code>AB</code>.
+In tal caso, avremo che il nodo $v$ avrà un nodo vicino nello stato <code>AB</code> e uno nello stato <code>B</code>, come nella seguente immagine</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img5.png width=auto alt="Il nodo $v$ deve scegliere quale stato conviene adottare."></p><p>Dato che stiamo assumendo che $u$ è ricaduto nella zone verde del grafico, fissiamo le relazioni $c &lt; 1$ e $c \leq a$.
+Ci chiediamo ora:</p><ul><li>Per quali valori la diffusione di <code>A</code> si blocca?</li><li>Oppure, per quali valori si genera una cascata completa di <code>A</code>?</li><li>Oppure ancora, è possibile che si generi una cascata completa di <code>AB</code>?</li></ul><p>Iniziamo col calcolare i vantaggi che avrebbe $v$ ad adottare uno stato
+$$
+\begin{align*}
+p_A(v) &= a\\p_B(v) &= 2\\p_{AB}(v) &= \max{\lbrace a, 1 \rbrace} + 1 - c
+\end{align*}
+$$</p><p>A questo punto possiamo dividere l&rsquo;analisi in due casi:</p><ol><li>$a &lt; 1$, ovvero quando la coppia $(a,c)$ cade all&rsquo;interno del triangolo verde $(0,0), (1,0), (1,1)$.</li><li>$a \geq 1$, ovvero quando la coppia $(a,c)$ cade all&rsquo;interno della restante area verde.</li></ol><p>Consideriamo il caso <code>(1)</code>.
+In tale situazione avremo che i rispettivi guadagni sono
+$$
+\begin{align*}
+p_A(v) &&lt; 1\\p_B(v) &= 2\\p_{AB}(v) &= 2 - c
+\end{align*}
+$$</p><p>ovvero avremo che $p_A(v) &lt; p_B(v)$ e $p_{AB}(v) &lt; p_B(v)$.
+In tal csaso accadrà che $v$ adotta <code>B</code>, e quindi la diffusione di <code>A</code> si blocca dopo un&rsquo;altro passo.
+Possiamo quindi estendere la parte blu del grafico come nell&rsquo;immagine seguente</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img6.png width=auto alt="Estensione area blu."></p><p>Non resta che considerare il caso <code>(2)</code>, quando $a \geq 1$.</p><p>Anche in questo caso conviene dividere l&rsquo;analisi in due casi disgiunti:
+il caso $1 \leq a &lt; 2$ e il caso $a > 2$.</p><p>Nel caso $a > 2$ avremo che i guadagni di $v$ sono
+$$
+\begin{align*}
+p_A(v) &= a > 2\\p_B(v) &= 2\\p_{AB}(v) &= a + 1 - c > a
+\end{align*}
+$$</p><p>Possiamo dire $v$ adotterà <code>AB</code>, perché abbiamo la catena di disuguaglianze $p_{AB}(v) > p_A(v) > p_B(v)$.
+Dopo un passo osserviamo che il nodo $u$ passa dalla stato <code>AB</code> allo stato <code>A</code>.
+Possiamo quindi concludere che quando quando sono vere le seguenti condizioni, dopo una fase transitoria allo stato <code>AB</code>, avviene una cascata completa di <code>A</code>.
+$$
+\begin{cases}
+c &lt; 1\\a > 2
+\end{cases}
+$$</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img7.png width=auto alt></p><p>Infine, consideriamo l&rsquo;ultimo caso $1 \leq a &lt; 2$.
+In queste condizioni, i valori di guadagno di $v$ risultano essere
+$$
+\begin{align*}
+p_A(v) &= a &lt; 2\\p_B(v) &= 2\\p_{AB}(v) &= a + 1 - c
+\end{align*}
+$$</p><p>Dato che $p_A(v) &lt; p_B(v)$, sappiamo che in qeull&rsquo;area il processo di diffusione di <code>A</code> si ferma, e quindi non avremo mai una cascata completa di <code>A</code>.
+Poi, $p_B(v) > p_{AB}(v)$ se e solo se $2 > a + 1 - c$, ovvero se $a &lt; c + 1$. In tal caso $v$ adotterà lo stato <code>B</code>, e in un altro passo verrà bloccato il processo di diffusione di <code>A</code>.
+Viceversa, se $a > c + 1$, allora avremo che $p_{AB}(v) > p_B(v)$, e quindi $v$ adotterà lo stato <code>AB</code>. Come prima, dopo un passo il nodo $u$ adotterà <code>A</code>, e così via dopo il nodo $v$, scatenando una cascata completa di <code>A</code>, dove però tutti i nodi transitano prima per <code>AB</code>.</p><p>Il grafico risultante finale è il seguente</p><p><img src=https://Alessandrostr95.github.io//ar-lesson11-img8.png width=auto alt></p><p>Riassumendo:</p><ul><li>quando la coppia $(a,c)$ cade nell&rsquo;area blu, allora il processo di diffusione di <code>A</code> si blocca definitivamente in un passo.</li><li>quando la coppia $(a,c)$ cade nell&rsquo;area gialla, si scatena una cascata completa di <code>A</code>, senza che nessun nodo transiti mai attraverso lo stato <code>AB</code>.</li><li>quando la coppia $(a,c)$ cade nell&rsquo;area verde, tutti i nodi passeranno allo stato <code>A</code> dopo però essere prima transitati attraverso lo stato <code>AB</code>.</li></ul><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>sforzo.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><hr><div class=page-end id=footer><div class=backlinks-container><h3>Backlinks</h3><ul class=backlinks><li>No backlinks found</li></ul></div><div><script src=https://cdn.jsdelivr.net/npm/d3@6.7.0/dist/d3.min.js integrity="sha256-+7jaYCp29O1JusNWHaYtgUn6EhuP0VaFuswhNV06MyI=" crossorigin=anonymous></script><h3>Interactive Graph</h3><div id=graph-container></div><style>:root{--g-node:var(--secondary);--g-node-active:var(--primary);--g-node-inactive:var(--visited);--g-link:var(--outlinegray);--g-link-active:#5a7282}</style><script src=https://Alessandrostr95.github.io/js/graph.abd4bc2af3869a96524d7d23b76152c7.js></script></div></div><div id=contact_buttons><footer><p>Made by Alessandro Straziota using <a href=https://github.com/jackyzha0/quartz>Quartz</a>, © 2022</p><ul><li><a href=https://Alessandrostr95.github.io/>Home</a></li><li><a href=https://twitter.com/Alessandro_357>Twitter</a></li><li><a href=https://github.com/Alessandrostr95>Github</a></li></ul></footer></div></div></body></html>
